@@ -11,7 +11,6 @@ interface IYoutubeApiInterface{
         @Query("key") apiKey: String = BuildConfig.ApiKey,
         @Query("channelId") channelId: String,
         @Query("part") part: String = "snippet,id",
-        @Query("order") videoOrder: String = "date",
         @Query("maxResults") maxResult: Int
-    ) : ModelChannel
+    ) : Call<ModelChannel>
 }

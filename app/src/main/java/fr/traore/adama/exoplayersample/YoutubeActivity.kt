@@ -15,13 +15,16 @@ import com.google.android.youtube.player.YouTubePlayer
 import kotlinx.android.synthetic.main.activity_youtube.*
 
 class YoutubeActivity : YouTubeBaseActivity(), YouTubePlayer.OnInitializedListener {
-    private val YOUTUBEVIDEO_ID = "aqz-KE-bpKQ"
+    private var YOUTUBEVIDEO_ID = "aqz-KE-bpKQ"
     private val DIALOG_REQUEST_CODE = 1
     var TAG = YoutubeActivity::class.java.simpleName
 
     companion object {
-        fun launch(activity: Activity){
-            activity.startActivity(Intent(activity, YoutubeActivity::class.java))
+        val EXTRA_VID_ID = "vid.id"
+        fun launch(activity: Activity, extraId: String){
+            val intent = Intent(activity, YoutubeActivity::class.java)
+            intent.putExtra(EXTRA_VID_ID, extraId)
+            activity.startActivity(intent)
             activity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         }
     }
@@ -50,6 +53,10 @@ class YoutubeActivity : YouTubeBaseActivity(), YouTubePlayer.OnInitializedListen
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_youtube)
+
+        if(intent.hasExtra(EXTRA_VID_ID)){
+            YOUTUBEVIDEO_ID = intent.getStringExtra(EXTRA_VID_ID)
+        }
 
         playerView.initialize(BuildConfig.ApiKey, this)
     }

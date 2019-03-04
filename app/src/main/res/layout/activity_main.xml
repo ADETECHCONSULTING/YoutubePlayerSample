@@ -8,5 +8,10 @@
         tools:context=".MainActivity">
 
 
+    <android.support.v7.widget.RecyclerView
+            android:id="@+id/rcvMain"
+            android:layout_width="match_parent"
+            tools:listitem="@layout/youtube_item"
+            android:layout_height="match_parent"/>
 
 </android.support.constraint.ConstraintLayout>
